@@ -1,0 +1,19 @@
+spring:
+  task:
+    scheduling:
+      thread-name-prefix: pt-schedule-
+pt:
+  attendance:
+    sites:
+      -
+        url: https://www.ptone.com
+        cron: 23 11 0 * * *
+        cookies: c_secure_uid=aaaa; c_secure_pass=bbbb; c_secure_ssl=cccc; c_secure_tracker_ssl=dddd; c_secure_login=eeee; cf_clearance=ffffff
+      -
+        url: https://www.pttwo.com
+        cron: 16 3 0 * * *
+        cookies: c_secure_uid=aaaa; c_secure_pass=bbbb; c_secure_ssl=cccc; c_secure_tracker_ssl=dddd; c_secure_login=eeeee
+      -
+        url: http://pt.ptthree.net
+        cron: 33 22 0 * * *
+        cookies: c_secure_uid=aaaa; c_secure_pass=bbbb; c_secure_ssl=cccc; c_secure_tracker_ssl=dddd; c_secure_login=eeee

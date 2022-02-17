@@ -1,0 +1,198 @@
+<!-- 页面开始 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="NexusPHP" />
+    <title>PT时间 :: 签到 - Powered by NexusPHP</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="search" type="application/opensearchdescription+xml" title="PT时间 Torrents" href="opensearch.php" />
+    <link rel="stylesheet" href="styles/mediumfont.css" type="text/css" />
+    <link rel="stylesheet" href="styles/sprites.css" type="text/css" />
+    <link rel="stylesheet" href="pic/forum_pic/chs/forumsprites.css" type="text/css" />
+    <link rel="stylesheet" href="styles/PTtimeWhite/theme.css" type="text/css" />
+    <link rel="stylesheet" href="styles/PTtimeWhite/DomTT.css" type="text/css" />
+    <link rel="stylesheet" href="styles/curtain_imageresizer.css" type="text/css" />
+    <link rel="stylesheet" href="styles/common.css" type="text/css" />
+    <!-- ali_icon_xiugai -->
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1856866_9s6ekz2bicr.css" type="text/css" />
+    <link rel="stylesheet" href="styles/mp.css" type="text/css" />
+    <link rel="stylesheet" href="pic/category/chd/scenetorrents/catsprites.css" type="text/css" />
+    <link rel="alternate" type="application/rss+xml" title="Latest Torrents" href="torrentrss.php" />
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/polyfill.js"></script>
+    <script type="text/javascript" src="curtain_imageresizer.js"></script>
+    <script type="text/javascript" src="ajaxbasic.js"></script>
+    <script type="text/javascript" src="common.js"></script>
+    <script type="text/javascript" src="domLib.js"></script>
+    <script type="text/javascript" src="domTT.js"></script>
+    <script type="text/javascript" src="domTT_drag.js"></script>
+    <script type="text/javascript" src="fadomatic.js"></script>
+    <style>
+        .clock {
+            height:50px;
+            border-radius:50%;
+            position:relative;
+        }
+        .clock span{
+            display:inline-block;
+            position:absolute;
+            height:50px;
+            left:23px;
+            top:2px;
+        }
+        .clock span:before{
+            position:absolute;
+            display:inline-block;
+            width:2px;
+            bottom:50%;
+        }
+        .clock span:first-of-type {
+            animation:zhuanquan_s 60s ease infinite
+        }
+        .clock span:nth-of-type(2) {
+            animation:zhuanquan_m 3600s ease infinite
+        }
+        .clock span:last-of-type {
+            animation:zhuanquan_h 43200s ease infinite
+        }
+        /* 秒针 */
+        .clock span:first-of-type:before {
+            left:-2.5px;
+            height:13px;
+            background:#27A;
+            content:"";
+        }
+        /* 分针 */
+        .clock span:nth-of-type(2):before {
+            left:-1.5px;
+            height:11px;
+            background:#FF9900;
+            content:"";
+        }
+        /* 时针 */
+        .clock span:last-of-type:before {
+            left:-0.5px;
+            height:9px;
+            background:#C00;
+            content:"";
+        }
+        @keyframes zhuanquan_s {
+            0% {
+                transform:rotate(156deg)
+            }
+            100% {
+                transform:rotate(516deg)
+            }
+        }
+
+        @keyframes zhuanquan_m {
+            0% {
+                transform:rotate(174deg)
+            }
+            100% {
+                transform:rotate(534deg)
+            }
+        }
+
+        @keyframes zhuanquan_h {
+            0% {
+                transform:rotate(240deg)
+            }
+            100% {
+                transform:rotate(600deg)
+            }
+        }
+
+    </style>
+</head>
+<body>
+<table class="head auto" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+        <td class="clear">
+            <div class="logo_img">
+                <!-- 针 -->
+                <div class="clock dib">
+                    <span></span><span></span><span></span>
+                </div>
+                <!-- logo -->
+                <a class="pr" href="index.php"><img height=50 src="/pic/ptt.png" alt="PT时间" title="PT时间 - 9kg满足对小姐姐的念想，好电影满足对精神的追求，好教程满足对财富的渴望。祝大家在PT时间玩得愉快！欢迎捐赠，鼓励站长！" /></a>
+                <!-- 广告 -->
+                <p class="fcb">9kg满足对小姐姐的念想，好电影满足对精神的追求，好教程满足对财富的渴望。祝大家在PT时间玩得愉快！欢迎捐赠，鼓励站长！</p>
+            </div>
+        </td>
+        <td class="clear nowrap" align="right" valign="middle">
+            <a href="donate.php" class="btn btn-danger"><i class="icon pt-aixinjuankuan"></i> 捐赠</a>
+        </td>
+    </tr>
+</table>
+
+<!-- 导航结构 -->
+<table class="mainouter mb10" width="90%" cellspacing="0" cellpadding="5" align="center"><tbody>
+<tr>
+    <td id="nav_block" class="text" align="center">
+        <table class="main" width="1200" border="0" cellspacing="0" cellpadding="0"><tr><td class="embedded" ><div id="nav"><ul id="mainmenu" class="menu mt10"><li><a href="index.php">&nbsp;首&nbsp;&nbsp;页&nbsp;</a></li><li><a href="forums.php">&nbsp;论&nbsp;&nbsp;坛&nbsp;</a></li><li><a href="torrents.php">&nbsp;综&nbsp;&nbsp;合&nbsp;</a></li><li><a href="upload.php">&nbsp;发&nbsp;&nbsp;布&nbsp;</a></li><li><a href="offers.php">&nbsp;候&nbsp;&nbsp;选&nbsp;(17)</a></li><li><a href="viewrequest.php">求种必应(39)</a></li><li><a href="usercp.php">&nbsp;控制面板&nbsp;</a></li><li><a href="topten.php">排&nbsp;行&nbsp;榜</a></li><li><a href="log.php">&nbsp;日&nbsp;&nbsp;志&nbsp;</a></li><li><a href="rules.php">&nbsp;规&nbsp;&nbsp;则&nbsp;</a></li><li><a href="faq.php">&nbsp;常见问题&nbsp;</a></li><li><a href="usercp.php?action=special">&nbsp;特殊设定&nbsp;</a></li><li><a style=" background:#017A85" href="sendmessage.php?receiver=2">&nbsp;联系管理&nbsp;</a></li><li><a style=" background:#116677" href="https://yao.pttime.org/Vip/index" target="_blank"> 贵宾礼包专区 </a></li><li><a style=" background:#D30D15" href="/forums.php?action=viewtopic&topicid=16&page=0">致新用户</a></li></ul></div></td></tr></table>
+        <table id="info_block" cellpadding="4" cellspacing="0" border="0" width="90%">
+            <tr>
+                <td>
+                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                        <tr>
+                            <td class="bottom clearfix" align="left">
+                            <span class="medium left">嗨,
+                            <a  href="userdetails.php?id=8210" class='User_Name'><b>palapalabo</b></a>(UID=8210,<a href="userdetails.php?id=8210" class="fcs User">个人中心</a>)                            [<a href="logout.php">退出</a>]
+                                                                        [<a href="torrents.php?inclbookmarked=1&amp;allsec=1&amp;incldead=0">收藏</a>]
+                        [<a href="myrss.php">RSS 下载筐</a>]
+                        <font class='ml10'><b>魔力值 </b>(50.41魔力/小时)</font>
+                        [<a href="mybonus.php" class="fcs">说明及使用</a>]: 252,300.6&nbsp;(签到已得715)                        <font class="ml10"><b>邀请注册</b></font>
+                        [<a class="fcs" href="invite.php?id=8210">发送</a>]: 2/0</span>
+                                <!-- 大包免费提醒 -->
+
+                                <div class="medium right">
+                                    <span><font color="#D30D15">单种上传限速：<b>100M/s</b>（调速后，联系管理取消超速处罚），大包免费：<b>100G</b></font></span>
+                                    <span class="ml10">当前时间：08:29</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="bottom clearfix" align="right">
+                                <div class="left">
+                                    <font class="color_ratio">分享率：</font> 6.728                                <font class='color_uploaded'>上传量：</font> 631.65 GB                                <font class='color_downloaded'> 下载量：</font> 93.88 GB                                <font class='color_active'>当前活动：</font> <i alt="Torrents seeding" title="当前做种" class="arrowup icon pt-shangsheng fcr"></i>8                                <i alt="Torrents seeding" title="当前下载" class="arrowdown icon pt-xiajiang fcg"></i>0                                <font class='color_connectable'>可连接：</font><b><font color="green">是</font></b> <font class='color_slots'>连接数：</font>无限制</span>
+                                </div>
+                                <div class="right">
+                                    <a class="mr10" href="messages.php">收件箱:3 (0 新)</a><a class="mr10" href="messages.php?action=viewmailbox&amp;box=-1">发件箱:0</a>  <a class="mr10" href="friends.php">社交名单</a> <a href="getrss.php">获取RSS</a>                            </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+
+        <table id="tips" cellpadding="4" cellspacing="0" border="0" width="90%">
+            <tr><td>
+                <span class="tal mr10"><a class="fcr" href="/forums.php?action=viewtopic&topicid=9&page=p11#pid11"><i class="icon pt-jinggao"></i> 发种及三严说明(必读)</a></span><a class="mr20 fcg" href="/forums.php?action=viewtopic&topicid=349"><i class="icon pt-jinzhi"></i>本月禁发清单</a><span class="tal mr10"><a class="fcs" href="/forums.php?action=viewforum&forumid=7"><i class="icon pt-taolun"></i> 发种奖励计划（免费3天）</a></span><span class="tal mr10"><a class="fcs" href="https://yao.pttime.org" target="_blank"><i class="icon pt-guanfang"></i> 官窑直达</a></span><span class="tal mr10"><a class="fcs" href="/forums.php?action=viewforum&forumid=11"><i class="icon pt-yaopin"></i> 开注、发药、求药</a></span><span class="tal mr10"><a class="fcs" href="	/forums.php?action=viewforum&forumid=1"><i class="icon pt-module"></i> 功能建议、反馈</a></span><div class="right"><span class="ml20" >
+	            <i class="icon pt-weixin fcg"></i> 微信(防走丢):162186880
+	            <i class="icon pt-qqqun-copy ml10 fcs"></i> QQ群(捐赠5元):818369831
+	            <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=37d1441cc5a7c08d8a676f675719ef1447536b3b4c3fea31984aa783547cdf9b"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="PT时间-www.pttime.org" title="PT时间-www.pttime.org"></a>
+	            </span></div>            </td></tr>
+        </table>
+    </td>
+</tr>
+</tbody></table>
+
+<!-- 信息+资源结构 -->
+<table class="mainouter" width="90%" cellspacing="0" cellpadding="5" align="center">
+    <tbody>
+    <tr>
+        <td id="outer" align="center" class="outer">
+            <div align="center" style="margin-bottom: 10px" id="ad_belownav"><font size="4"><span style="color: #D30D15;">无数据要求、新手免考核、资源全免费……永久VIP贵宾请捐赠：300RMB！</span><font size="2"><span style="color: #459961;">附赠礼包看捐赠页说明，感谢大家支持！</span></font><font size="2"><span style="color: gray;">(<a class="fcs" href="adredir.php?id=6&amp;url=%2Fforums.php%3Faction%3Dviewtopic%26amp%3Bforumid%3D3%26amp%3Btopicid%3D23" target="_blank">查看贵宾详细特权</a>)</span></font></font>该方案将长期生效。<br />
+                <span style="color: #108EE9;">特别提醒：1、邀请可获得5%上传流量分成！2、加个微信吧，防走丢。</span><br />
+            </div><table width="1000" border="1" cellspacing="0" cellpadding="10"><tr><td style='padding: 10px; background: #ffdd55' class="text" align="center">
+            <font color="black"><b>提醒</b>：本站暂停游客访问！请保存passkey访问方式并登录。<a target='_blank' class='fcs' href='/login.php?passkey=5061538b12a456b69be514741f41efe1'>点我，然后保存网址</a></font></td></tr></table></td></tr></tbody></table><table class="mainouter mt10" width="90%" cellspacing="0" cellpadding="5" align="center">
+    <tbody>
+    <tr>
+        <td id="outer" align="center" class="outer"><table class="main" width="1200" border="0" cellspacing="0" cellpadding="0"><tr><td class="embedded" ><h2 align="left">签到成功</h2><table width="100%" border="1" cellspacing="0" cellpadding="10"><tr><td class="text" >
+            <p>这是您的第 <b>142</b> 次签到，已连续签到 <b>4</b> 天，本次签到获得 <b>715</b> 个魔力值。</p></td></tr></table>
+            <ul><li>首次签到获得 10 个魔力值。</li><li>每次签到可额外获得 5 个魔力值，直到 1000 封顶。</li><li><ol><li>连续签到 10 天后，每次签到额外获得 200 魔力值（不累计）。</li><li>连续签到 20 天后，每次签到额外获得 500 魔力值（不累计）。</li><li>连续签到 30 天后，每次签到额外获得 1000 魔力值（不累计）。</li></ol></li></ul></td></tr></table>
+        </td></tr></table><div id="footer"><div style="margin-top: 10px; margin-bottom: 30px;" align="center"> (c)  <a href="https://www.pttime.org" target="_self">PT时间</a> 2019-2021 Powered by <a href="aboutnexus.php">NexusPHP</a><br /><br />[page created in <b> 0.043612 </b> sec with <b>18</b> db queries, <b>13</b> reads and <b>6</b> writes of memcached and <b>542.18 KB</b> ram]</div>
+    <div style="display: none;" id="lightbox" class="lightbox"></div><div style="display: none;" id="curtain" class="curtain"></div></div></body></html>

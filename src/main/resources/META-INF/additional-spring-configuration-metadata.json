@@ -1,0 +1,18 @@
+{
+  "groups": [
+    {
+      "name": "pt.attendance",
+      "type": "org.jdkcn.apps.pt.AttendanceProperties",
+      "sourceType": "org.jdkcn.apps.pt.AttendanceProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "pt.attendance.sites",
+      "type": "java.util.Set<org.jdkcn.apps.pt.AttendanceProperties.Site>",
+      "sourceType": "org.jdkcn.apps.pt.AttendanceProperties",
+      "description": "The pt site list."
+    }
+  ],
+  "hints": []
+}
