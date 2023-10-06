@@ -64,6 +64,9 @@ public class AttendanceExecutor implements Runnable{
 			Document htmlDocument = Jsoup.parse(responseText);
 			Elements textElements = htmlDocument.select("#outer .embedded .text");
 			if (textElements.isEmpty()) {
+				textElements = htmlDocument.select("#outer .embedded li");
+			}
+			if (textElements.isEmpty()) {
 				log.info("{} responseText:{}", this.site.getUrl(), responseText);
 			} else {
 				log.info("{} attendance result:{}", this.site.getUrl(), textElements.first().text());

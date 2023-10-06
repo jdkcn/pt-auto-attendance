@@ -44,5 +44,10 @@ public class JsoupTests {
 		textElements = htmlDocument.select("#outer .embedded .text");
 		log.info("outer text:{}", textElements.isEmpty() ? "" : textElements.first().text());
 		assertEquals("这是您的第 142 次签到，已连续签到 4 天，本次签到获得 715 个魔力值。", textElements.first().text());
+
+		htmlDocument = Jsoup.parse(this.getClass().getResourceAsStream("/html/attendance05.html"), "UTF-8", "");
+		textElements = htmlDocument.select("#outer .embedded li");
+		log.info("outer text:{}", textElements.isEmpty() ? "" : textElements.first().text());
+		assertEquals("这是你的第 930 次签到， 连续签到 195 天，本次签到获得 600 个魔力值。", textElements.first().text());
 	}
 }
