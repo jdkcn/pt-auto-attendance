@@ -11,9 +11,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import org.jdkcn.apps.pt.AttendanceProperties;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
+import org.jdkcn.apps.pt.HtmlParseUtils;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.support.PeriodicTrigger;
 
@@ -28,12 +26,9 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 public class AttendanceExecutor implements Runnable{
-	private AttendanceProperties.Site site;
+	private final AttendanceProperties.Site site;
 	private final TaskScheduler taskScheduler;
 	private final AttendanceScheduler attendanceScheduler;
-
-	private final String userAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36";
-	private final String attendanceUrl = "/attendance.php";
 
 	public AttendanceExecutor(AttendanceProperties.Site site, TaskScheduler taskScheduler,
 			AttendanceScheduler attendanceScheduler) {
@@ -44,11 +39,13 @@ public class AttendanceExecutor implements Runnable{
 
 	@Override
 	public void run() {
+		String attendanceUrl = "/attendance.php";
 		String url = this.site.getUrl() + attendanceUrl;
+		String userAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36";
 		Request request = new Request.Builder()
 				.url(url)
 				.addHeader("referer", this.site.getUrl())
-				.addHeader("user-agent", this.userAgent)
+				.addHeader("user-agent", userAgent)
 				.addHeader("Cookie", this.site.getCookies())
 				.build();
 		try (Response response = new OkHttpClient.Builder()
@@ -60,17 +57,7 @@ public class AttendanceExecutor implements Runnable{
 				this.attendanceScheduler.clearFailedScheduleFuture(site);
 				return;
 			}
-			String responseText = body.string();
-			Document htmlDocument = Jsoup.parse(responseText);
-			Elements textElements = htmlDocument.select("#outer .embedded .text");
-			if (textElements.isEmpty()) {
-				textElements = htmlDocument.select("#outer .embedded li");
-			}
-			if (textElements.isEmpty()) {
-				log.info("{} responseText:{}", this.site.getUrl(), responseText);
-			} else {
-				log.info("{} attendance result:{}", this.site.getUrl(), textElements.first().text());
-			}
+			log.info("{} attendance result:{}", this.site.getUrl(), HtmlParseUtils.parseAttendResult(body.string()));
 			this.attendanceScheduler.clearFailedScheduleFuture(site);
 		} catch (IOException ex) {
 			log.error("request error: {}", url, ex);

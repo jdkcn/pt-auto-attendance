@@ -1,0 +1,315 @@
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- <meta name="referrer" content="no-referrer" />  -->
+
+    <meta name="generator" content="NexusPHP" />
+    <title>PTT :: 签到 - Powered by NexusPHP</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="search" type="application/opensearchdescription+xml" title="PTT Torrents" href="opensearch.php" />
+    <link rel="stylesheet" href="styles/mediumfont.css" type="text/css" />
+
+    <link rel="stylesheet" href="styles/curtain_imageresizer.css" type="text/css" />
+    <link rel="stylesheet" href="styles/common.css" type="text/css" />
+    <!-- ali_icon_xiugai -->
+    <link rel="stylesheet" href="//at.alicdn.com/t/c/font_1856866_9aqypclcy9.css" />
+    <link rel="stylesheet" href="styles/mp.css" type="text/css" />
+    <link rel="stylesheet" href="styles/PTtimeWhite/theme.css" type="text/css" />
+    <link rel="stylesheet" href="pic/category/chd/scenetorrents/catsprites.css" type="text/css" />
+    <link rel="alternate" type="application/rss+xml" title="Latest Torrents" href="torrentrss.php" />
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <!-- 打补丁的js -->
+    <script type="text/javascript" src="js/polyfill.js"></script>
+    <!-- 用户图片类 -->
+    <script type="text/javascript" src="js/ajaxbasic.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/curtain_imageresizer.js"></script>
+    <script type="text/javascript" src="js/watermark.js"></script>
+    <style>
+        .clock {height:50px;border-radius:50%;position:relative;}
+        .clock span{display:inline-block;position:absolute;height:50px;left:24.5px;top:2px;}
+        .clock span:before{position:absolute;display:inline-block;width:2px;bottom:50%;}
+        .clock span:first-of-type {animation:zhuanquan_s 60s ease infinite;}
+        .clock span:nth-of-type(2) {animation:zhuanquan_m 3600s ease infinite}
+        .clock span:last-of-type {animation:zhuanquan_h 43200s ease infinite}
+        .clock span:first-of-type:before {left:-1px;height:11px;background:#002753;content:"";}/* 秒针 */
+        .clock span:nth-of-type(2):before {left:-1px;height:9px;background:#FF9900;content:"";}/* 分针 */
+        .clock span:last-of-type:before {left:-1px;height:7px;background:#c3272b;content:"";}/* 时针 */
+        @keyframes zhuanquan_s {0% {transform:rotate(78deg)}100% {transform:rotate(438deg)}}
+        @keyframes zhuanquan_m {0% {transform:rotate(42deg)}100% {transform:rotate(402deg)}}
+        @keyframes zhuanquan_h {0% {transform:rotate(330deg)}100% {transform:rotate(690deg)}}
+    </style>
+</head>
+<body >
+<table class="head auto" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+        <td class="clear">
+            <div class="clearfix auto pt10 mainouter">
+                <div class="clearfix">
+                    <div class="left">
+                        <div class="logo_img">
+                            <!-- 针 -->
+                            <div class="clock dib">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <!-- logo -->
+                            <a class="pr" href="index.php"><img height=50 src="/pic/ptt-w.png" alt="PTT" title="PTT - 分享你所爱，他所求，得你所愿！语言设置为中文简体，其他语言暂无法完整支持。祝大家玩得愉快！欢迎捐赠，鼓励站长和管理！" /></a>
+                            <!-- 广告 -->
+                        </div>
+                    </div>
+                    <div class="right">
+                        <a href="/donate.php" class="btn btn-danger"><i class="icon pt-aixinjuankuan"></i> 捐赠&说明</a>
+                        <a href="/complains.php" class="btn btn-success"><i class="icon pt-shensu"></i> 申诉</a>
+                    </div>
+                </div>
+                <!-- slogan -->
+                <div class="fcb clearfix">
+                    <div class='left'>分享你所爱，他所求，得你所愿！语言设置为中文简体，其他语言暂无法完整支持。祝大家玩得愉快！欢迎捐赠，鼓励站长和管理！</div>
+                    <div class='right'>
+                        <span class="fcs tal ml10"><i class="icon pt-yewubankuai"></i> 期刊、论文、职称，加管理微信发送“期刊”(无商业合作)</span><span class="fcs tal ml10"><i class="icon pt-export"></i> <a class=fcs href="forbid.php"> 永久封禁清单 </a><span class="tal ml10"><a class="fcs" href="/gamestone.php"><i class="icon pt-handrocko"></i> 石头.剪刀.布</a></span><span class="tal ml10"><a class="fcs" href="/gamepoke.php"><i class="icon pt-qipai"></i> 冲,21点</a></span><span class="tal ml10"><a class="fcs" href="/forums.php?action=viewtopic&forumid=1&topicid=2375"><i class="icon pt-jubao"></i> Bug提交、反馈及建议</a></span>                        </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<!-- 导航结构 -->
+<table id="nav_list" class="mainouter mb5" width="90%" cellspacing="0" cellpadding="5" align="center">
+    <tbody>
+    <tr>
+        <td id="nav_block" class="text" align="center">
+            <table class="main" width="1200" border="0" cellspacing="0" cellpadding="0"><tr><td class="embedded" ><div id="nav"><ul id="mainmenu" class="menu mt5 main_nav"><li><a href="index.php">&nbsp;首&nbsp;&nbsp;页&nbsp;</a></li><li><a href="forums.php">&nbsp;论&nbsp;&nbsp;坛&nbsp;</a></li><li><a href="torrents.php">&nbsp;综&nbsp;&nbsp;合&nbsp;</a></li><li><a href="adults.php">&nbsp;9kg&nbsp;</a></li><li><a href="upload.php">&nbsp;发布种子&nbsp;</a><ul class="drop menu5"><li><a href="upload_adults.php">发布9kg</a></li></ul></li><li><a href="/offers.php">&nbsp;候&nbsp;&nbsp;选&nbsp;(3)</a></li><li><a href="viewrequest.php">&nbsp;求&nbsp;&nbsp;种&nbsp;(692)</a></li><li><a href="topten.php">排&nbsp;行&nbsp;榜</a></li><li><a href="usercp.php">&nbsp;设置中心&nbsp;</a></li><li><a href="usercp.php?action=special">&nbsp;特殊设定&nbsp;</a></li><li><a style=" background:#017A85" href="sendmessage.php?receiver=2">&nbsp;联系管理(站内信)&nbsp;</a></li><li class="lianghao "><a href="lianghao.php">&nbsp;靓☆号☆区&nbsp;</a></li><li><a class='text_new_user' href="/forums.php?action=viewtopic&topicid=16&page=0">&nbsp;致新用户&nbsp;</a></li></ul></div></td></tr></table>
+            <!-- 用户信息 -->
+            <table id="info_block" cellpadding="4" cellspacing="0" border="0" width="97%">
+
+                <tr>
+                    <td class="bottom clearfix" align="left">
+                        <span class="medium left">嗨,
+                            <a  href="userdetails.php?id=8210" class='User_Name'><b>palapalabo</b></a>[UID=8210][(幼儿园)User][<a href="userdetails.php?id=8210" class="fcs fwb User">个人中心</a>]                            [<a href="logout.php"><b>退出</b></a>]
+                            <span>[<a href="bookmarks.php?inclbookmarked=1&amp;allsec=1&amp;incldead=0">收藏</a>]</span>
+                            <span>[<a href="myrss.php">RSS下载筐</a>]</span>
+                            <span>[<a href='getrss.php'>获取RSS</a>]</span>
+                            <font class="ml10"><b>邀请注册</b></font>
+                            [<a class="fcs" href="invite.php?id=8210">邀请</a>]:
+                            2/0<span class='ml10'><font><b>开注邀请码：</b></font><font class='fc8'>******((初中)Elite User及以上生效)</font></span><span class="tal ml10"><a class="fcs" href="/forums.php?action=viewforum&forumid=11"><i class="icon pt-yaopin"></i> 开注、发药、求药</a></span>                        </span>
+                        <!-- 大包免费提醒 -->
+                        <div class="right">
+                            <!-- 单种限速 -->
+                            <span class="ml5 fcr">单种上传限速：<b>100M/s</b></span>
+                            <!-- 大包免费 -->
+                            <span class="ml5 fcr">大包免费(发布自动)：<b>≥</b><b>100G</b></b></font></span>
+                            <!-- 0流量包大小 -->
+                            <span class="ml5 fcr">0流量(<a class='fcs' href='/sendmessage.php?receiver=2'>发布者申请</a>)：<b>≥</b><b>500G</b></b></font></span>
+                            <!-- 当前时间 -->
+                            <span class="ml5">当前时间:23:07</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bottom clearfix" align="right">
+                        <div class="left">
+                            <span class='mr5'><font class="color_ratio">分享率:</font>5.86</span>
+                            <span class='mr5'><font class='color_uploaded'>上传:</font>1.025TB</span>
+                            <span class='mr5'><font class='color_downloaded'> 下载:</font>178.95GB</span>
+                            <span class='mr5'><font class='color_active'>活动:</font>
+                                <i alt="Torrents seeding" title="当前做种" class="arrowup icon pt-shangsheng fcr"></i>0                                    <i alt="Torrents seeding" title="当前下载" class="arrowdown icon pt-xiajiang fcg"></i>0</span>
+                            <span class='mr5'>可连接:<font color="green">是</font></span>
+                            <!-- 最大连接数系统，目的是让用户只能下载有限多个链接。 -->
+                            <span class='mr5'>连接数:<font color="green">无限</font></span>
+                            <span class='mr5'><font>魔力值 (0魔力/小时)</font>
+                                    [<a href="mybonus.php" class="fcs">使用&说明</a>]: 1864665.6[<a href="attendance.php?type=list" class="fcs">详情</a>][<font color=gray>37枚</font>]</span>
+
+                        </div>
+                        <div class="right clearfix">
+                            <div class="left"><a class='mr10' href='/messages.php'>收件箱:0</a><a class='mr10' href='messages.php?action=viewmailbox&amp;box=-1'>发件箱:0</a> </div><div class="right"> <a class='mr10' href='friends.php'><i class='icon pt-luntan fcs'></i> 好友列表</a><i class="icon pt-weixin fcg"></i> 微信(需备注:8210):<font class="fcg">pttime2</font><i class="icon pt-qqqun-copy ml10 fcs"></i> Q群: <a class=fcs target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=PrDoWjNRQcE8VWx7NRTDfiz9ocsbu7m_&jump_from=webapi&authKey=4KxpLk6dZETOKFs6LtjxHaM3bG8vNa1s2smhi+jZJIipabxybNcYB62qfesGG2kX">205697152</a></div>                            </div>
+                    </td>
+                </tr>
+                <!-- 管理组相关 -->
+
+                <tr><td class="bottom clearfix">
+                    <div class="right"></div>            </td></tr>
+                <!-- 管理组相关结束 -->
+            </table>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<!-- 信息+资源结构 -->
+<table id="msg_list" class="mainouter" width="90%" cellspacing="0" cellpadding="5" align="center" >
+    <tbody>
+    <tr>
+        <td id="outer" align="center" class="outer" style="padding:0">
+            <div align=center id="ad_belownav" class='p10'><font size='3'><span style='color: green;'>无数据要求、新手免考、资源全免费、提供技术支持……永久VIP贵宾捐赠：550RMB！</span></font><span style='color: gray;'>若因不可抗力永久关站可退余额！</span><a class="fcs" href="adredir.php?id=6&amp;url=%2Fforums.php%3Faction%3Dviewtopic%26amp%3Bforumid%3D3%26amp%3Btopicid%3D23" target="_blank">贵宾特权具体说明</a><br />
+                <span style='color: #444444;'>1、私邀有5%上传分成。2、特殊设定可控制被邀请人访问权限。3、买卖邀请、攻击站点和人员、邀请未成年，将连带处罚。4、数据异常参考《<a class="fcs" href="adredir.php?id=6&amp;url=%2Fforums.php%3Faction%3Dviewtopic%26amp%3Btopicid%3D16%26amp%3Bpage%3Dp26%23pid26" target="_blank">致新用户</a>》第四部分68条，等级参考第五部分，<a class="fcs" href="adredir.php?id=6&amp;url=%2Fforums.php%3Faction%3Dviewtopic%26amp%3Bforumid%3D8%26amp%3Btopicid%3D955" target="_blank">Tracker、访问异常解决思路</a>。</span>5、<span style='color: #CC0000;'>京东11.11领红包0.5-11111元，每天都可以领：<a class="fcs" href="adredir.php?id=6&amp;url=https%3A%2F%2Fu.jd.com%2Fp8ig0tz" target="_blank">点击领取&gt;&gt; </a></span></div></td></tr></tbody></table><table class="mainouter mt5" width="90%" cellspacing="0" cellpadding="5" align="center"><tbody>
+<tr>
+    <td id="outer" align="center" class="outer"><table class="main" width="1200" border="0" cellspacing="0" cellpadding="0"><tr><td class="embedded" ><b>系统提醒</b><br><font color=red>今天已签到，请勿重复刷新(高频高量刷可能导致封号)，</font>已刷次数：<b>0</b>次。<br><h2>签到记录</h2><h2>7天签到记录（补签卡剩余:37）</h2><span class="dib w200 pr20">时间：2023-11-02 07:44:11</span><span class="dib w150">获得魔力值：<b>100</b></span><span class="ml20">连续天数：<b>225</b></span>天<br><span class="dib w200 pr20">时间：2023-11-01 07:44:14</span><span class="dib w150">获得魔力值：<b>100</b></span><span class="ml20">连续天数：<b>224</b></span>天<br><span class="dib w200 pr20">时间：2023-10-31 20:18:25</span><span class="dib w150">获得魔力值：<b>600</b></span><span class="ml20">连续天数：<b>223</b></span>天<br><span class="dib w200 pr20">时间：2023-10-30 12:09:29</span><span class="dib w150">获得魔力值：<b>600</b></span><span class="ml20">连续天数：<b>222</b></span>天<br><span class="dib w200 pr20">时间：2023-10-29 10:25:20</span><span class="dib w150">获得魔力值：<b>600</b></span><span class="ml20">连续天数：<b>221</b></span>天<br><span class="dib w200 pr20">时间：2023-10-28 15:25:55</span><span class="dib w150">获得魔力值：<b>600</b></span><span class="ml20">连续天数：<b>220</b></span>天<br><span class="dib w200 pr20">时间：2023-10-27 00:22:32</span><span class="dib w150">获得魔力值：<b>600</b></span><span class="ml20">连续天数：<b>219</b></span>天<br><h2>补签卡使用说明</h2>1、补签卡一般会因为系统维护发放，或捐赠5RMB获得5张补签卡。捐赠后参考捐赠页说明发送站内信。
+        <br>2、补签卡只能补签7天内的未签到。
+        <br>3、补签卡可以获得基于补签前一天的魔力值。
+        <br>4、补签卡可以弥补连续天数，但不能弥补当天后续魔力。<br></td></tr></table>
+    </td></tr></table><div id='footer'><div style='padding:20px 0;' align='center'> (c)  <a href='https://www.pttime.org' target='_self'>PTT</a> 2019.12.1 - 2023.11.02 Powered by NexusPHP<br /><br />[page created in <b> 0.111310 </b> sec with <b>26</b> db queries, <b>15</b> reads and <b>10</b> writes of memcached and <b>10.96MB</b> ram]</div>
+</div>    <!-- 底部html -->
+<div style="display: none;" id="imgbox" class="imgbox"></div>
+<div style="display: none;" id="lightbox" class="lightbox"></div>
+<div style="display: none;" id="curtain" class="curtain"></div>
+<div class="content"><div class="goTop w50 h50 lh50 bc br2 pf tac" style="bottom: 100px;right: 20px;display: none;"><i class="icon pt-zhiding cp"></i></div></div>
+<script>(function(){var js = "window['__CF$cv$params']={r:'81fd4930cbe6dd76',t:'MTY5ODkzNzYzMy43NjgwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
+<script type='text/javascript'>
+    //图片放大功能
+    var MenuOutTime = 0;
+    var ShowDivList = [];
+    // 放大的图片隐藏
+    function hiddmenu(t) {
+        MenuOutTime = 0;
+        t=t>500?t:500;
+        setTimeout(function() {
+            if (MenuOutTime != 1) {
+                for(var objname in ShowDivList){
+                    $(objname).style.display='none';
+                }
+            }
+        },t);
+    }
+    function setmenutime() {
+        MenuOutTime = 1
+    }
+    function CPos(x, y){
+        this.x = x;
+        this.y = y;
+    }
+
+    // 放单资源列表单个图片:obj,需要显示的元素，url图片url
+    function showmenu(obj,objname,url){
+
+        for(var rowname in ShowDivList){
+            $(rowname).style.display='none';
+        }
+        if (!url) return false;
+
+        if (!$(objname)) {
+            var objdiv = document.createElement("div");
+            objdiv.id = objname;
+        } else {
+            var objdiv = $(objname);
+        }
+        var target = obj;
+        var pos = new CPos(target.offsetLeft, target.offsetTop);
+
+        var target = target.offsetParent;
+        while (target)
+        {
+            pos.x += target.offsetLeft;
+            pos.y += target.offsetTop;
+
+            target = target.offsetParent
+        }
+        objdiv.style.display = 'block';
+        objdiv.onmousemove = function(){setmenutime();};
+        objdiv.onmouseout = function(){hiddmenu(objname);};
+        objdiv.onclick = function(){objdiv.style.display='none';};
+
+        objdiv.style.position='absolute';
+        objdiv.style.left = (pos.x)+42+'px';
+        objdiv.style.top = (pos.y+25)-25+'px';
+        if (!$(objname+'_img')) {
+            objdiv.innerHTML='';
+            var picdiv = document.createElement("img");
+            picdiv.setAttribute('src',url);
+            picdiv.setAttribute('height','400');
+            picdiv.setAttribute('id',objname+'_img');
+            //picdiv.style.display = 'none';
+            picdiv.onload=function (){
+                //picdiv.style.display = '';
+                resource_drawimage(objname+'_img',325,400);
+            };
+            objdiv.appendChild(picdiv);
+        }
+        document.body.appendChild(objdiv);
+        ShowDivList[objname]=1;
+        MenuOutTime = 1;
+
+        return false;
+    }
+
+    function resource_drawimage(objname,iwidth,iheight){
+        var ImgD=$(objname);
+        var image=new Image();
+        image.src=ImgD.src;
+        if(image.width>0 && image.height>0){
+            if(image.width/image.height>= iwidth/iheight){
+                if(image.width>iwidth){
+                    ImgD.width=iwidth;
+                    ImgD.height=(image.height*iwidth)/image.width;
+                }else{
+                    ImgD.width=image.width;
+                    ImgD.height=image.height;
+                }
+                ImgD.alt=image.width+"X"+image.height;
+            }else{
+                if(image.height>iheight){
+                    ImgD.height=iheight;
+                    ImgD.width=(image.width*iheight)/image.height;
+                }else{
+                    ImgD.width=image.width;
+                    ImgD.height=image.height;
+                }
+                ImgD.alt=image.width+"X"+image.height;
+            }
+        }
+    }
+    //当用户滑动滚动条达到400px，返回按钮显示，小于400px隐藏
+    //点击返回按钮时，让滚动条恢复原位
+    //第一个功能
+    let goTop = document.getElementsByClassName('goTop')[0];
+    //滑动用到window的onscroll（）的方法
+    window.onscroll = function () {
+        //让谁进行滚动 body html（有的浏览器获取不到body或html），所以做一个兼容的方式
+        //scrollTop据顶部的滑动的距离
+        let res = document.body.scrollTop || document.documentElement.scrollTop;
+        if (res >= 400) {//当大于400px，按钮出现
+            goTop.style.display = 'block';
+        } else {
+            goTop.style.display = 'none';
+        }
+
+    }
+    //第二个功能，点击返回功能
+    goTop.onclick = function () {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    // 监听offer选择
+    var selectofferobj = document.getElementById("selectoffer");
+    if(selectofferobj){
+        selectofferobj.onchange= function(e){
+            var selectofferobjval = selectofferobj.value;
+            jsajax({
+                type:"POST",
+                url:"action.php?type=get_offer",
+                dataType:"json",
+                data:{"id":selectofferobjval},
+                beforeSend:function(){
+                    document.getElementById("offer_tips").style.color='red';
+                    document.getElementById("offer_tips").textContent= '请求数据中';
+                },
+                success:function(msg){
+                    if(msg!=0){
+                        document.getElementById("offer_tips").style.color='green';
+                        document.getElementById("offer_tips").textContent = '请求完成';
+                        document.getElementById("seed_name").value = msg.name;
+                        document.getElementById("small_descr").value = msg.small_descr;
+                        document.getElementById("dburl").value = msg.douban;
+                        document.getElementById("imdburl").value = msg.imdb;
+                        document.getElementById("descr").value = msg.descr;
+                    }else{
+                        document.getElementById("offer_tips").style.color='red';
+                        document.getElementById("offer_tips").textContent = '无此数据';
+                    }
+                },
+                error:function(){
+                    console.log("error")
+                }
+            })
+        }
+    }
+
+</script>
+</html>
