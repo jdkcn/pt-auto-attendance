@@ -1,4 +1,6 @@
-FROM docker.homolo.net/library/openjdk:11-slim-bullseye
+FROM eclipse-temurin:17-jdk-jammy
+
+MAINTAINER Ye Rory <rory.cn@gmail.com>
 
 ARG user=spring
 ARG group=spring
@@ -16,18 +18,17 @@ ENV APP_HOME=$SPRING_HOME/app
 RUN groupadd -g 1000 ${group} \
 	&& useradd -d "$SPRING_HOME" -u 1000 -g 1000 -m -s /bin/bash ${user} \
 	&& mkdir -p $SPRING_HOME/config \
-	&& mkdir -p $SPRING_HOME/meta-data \
 	&& mkdir -p $SPRING_HOME/logs \
 	&& mkdir -p $APP_HOME \
-	&& chown -R ${user}:${group} $SPRING_HOME/config $SPRING_HOME/meta-data $APP_HOME $SPRING_HOME/logs
+	&& chown -R ${user}:${group} $SPRING_HOME/config $APP_HOME $SPRING_HOME/logs
 
-VOLUME ["$SPRING_HOME/meta-data", "$SPRING_HOME/config", "$SPRING_HOME/logs"]
+VOLUME ["$SPRING_HOME/config", "$SPRING_HOME/logs"]
 
 USER ${user}
 
 WORKDIR $SPRING_HOME
 
-EXPOSE 8080 9876
+EXPOSE 8900 9876
 
 ENTRYPOINT ["bash","-c","java $DEFAULT_JAVA_OPTS $JAVA_OPTS -cp ./app org.springframework.boot.loader.JarLauncher"]
 

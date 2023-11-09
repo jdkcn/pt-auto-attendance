@@ -1,6 +1,6 @@
 set -e -u -o pipefail
 
-VERSION=1.0.0-SNAPSHOT
+VERSION=latest
 
 if [ $# -ge 1 ]; then
   VERSION=$1
@@ -18,7 +18,7 @@ if [ "$JAR_FILE_COUNT" == 0  ]; then
     exit 1
 fi
 
-#获取jar包，反解
+#extract the jar
 cd "${CURRENT_DIR}"/target/ && JAR_FILE_NAME=$(ls *.jar|grep -v source)
 echo ${JAR_FILE_NAME}
 
